@@ -1,0 +1,121 @@
+// main: ../app.less
+
+// Inline panels - folosit in special la editarile inline
+
+@inline-panel-padding-lr: 10px;
+@inline-panel-padding-tb: 10px;
+@inline-panel-title-color: rgba(0,0,0,0.87);
+@inline-panel-text-color: rgba(0,0,0,0.54);
+@inline-panel-border-color: #e5e5e5;
+@inline-panel-bg-alt: #f5f5f5;
+@inline-panel-bg-lgrey: #fafafa;
+
+.panel-inline {
+    display: block;
+    padding: 0;
+    margin: 0 0 10px 0;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 0;
+    box-shadow: none;
+    
+    &.bg-white{ background: #ffffff;}
+    &.bg-lgrey{ background: @inline-panel-bg-lgrey;}
+    
+    &.b-t{ border-top: 1px solid @inline-panel-border-color;}
+    &.b-b{ border-bottom: 1px solid @inline-panel-border-color;}
+    &.b-l{ border-left: 1px solid @inline-panel-border-color;}
+    &.b-r{ border-right: 1px solid @inline-panel-border-color;}
+    &.b-a{ border: 1px solid @inline-panel-border-color;}
+
+    .panel-heading {
+        margin: 0;
+        padding: @inline-panel-padding-tb @inline-panel-padding-lr;
+        position: relative;
+        border-bottom: 1px solid transparent;
+        background: transparent;
+        border-radius: 0;
+        
+        .clearfix();
+        
+        .panel-title {
+            color: @inline-panel-title-color;
+            font-size: 15px;
+            font-weight: 500;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            
+            & > i{
+                font-size: 20px;
+                line-height: 0.85em;
+                vertical-align: -15%;
+            }
+        }
+        
+        .actions {
+            position: absolute;
+            right: @inline-panel-padding-lr;
+            top: @inline-panel-padding-tb;
+        }
+        
+        // Header with border
+        &.has-border{
+            border-bottom: 1px solid @inline-panel-border-color;
+
+        }
+        // Header with dark bg
+        &.header-alt{
+            background: @inline-panel-bg-alt;
+        }
+        
+        &:not(.has-border):not(.header-alt) + .panel-body{
+            padding-top: @inline-panel-padding-tb/2;
+        }
+    }
+    
+    .panel-body {
+        color: @inline-panel-text-color;
+        padding: @inline-panel-padding-tb @inline-panel-padding-lr;
+        
+        .clearfix();
+    }
+    
+    .panel-footer {
+        margin: 0;
+        padding: @inline-panel-padding-tb @inline-panel-padding-lr;
+        position: relative;
+        border-top: 1px solid transparent;
+        background: transparent;
+        border-radius: 0;
+        
+        .clearfix();
+        
+        // footer with border
+        &.has-border{
+            border-top: 1px solid @inline-panel-border-color;
+
+        }
+        // footer with dark bg
+        &.footer-alt{
+            background: @inline-panel-bg-alt;
+        }
+        
+        &:not(.has-border):not(.footer-alt){
+            padding-top: @inline-panel-padding-tb/2;
+        }
+    }
+    
+    .panel-body, .panel-header, .panel-footer{
+        p:first-child{
+            margin-bottom: 0;
+        }
+    }
+
+}
+
+// Inline panel in cadrul unei liste
+.item-list > li .inline-panel {
+    background: @inline-panel-bg-lgrey none repeat scroll 0 0;
+    margin: 0;
+}

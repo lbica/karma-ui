@@ -1,0 +1,150 @@
+// main: ../app.less
+
+
+//-------------------------------------
+//  File list for documents admin
+//-------------------------------------
+
+.file-list{
+    
+    .file-list-row{
+        .file-list-type{
+            
+           & > .file {
+                color: rgba(0, 0, 0, 0.54);
+                cursor: pointer;
+                display: block;
+                height: 100%;
+                line-height: 24px;
+                margin: -5px 0;
+                padding: 0;
+                position: relative;
+               
+               & > a, & > span{
+                   display: block;
+                   padding: 0 0 0 26px;
+                   color: rgba(0,0,0,0.54);
+                   text-decoration: none;
+                }
+               
+                & > a::before, & > span::before {
+                    content: '\f222';
+                    display: block;
+                    font-family: Material-Design-Iconic-Font;
+                    font-size: 20px;
+                    height: 20px;
+                    left: 0;
+                    position: absolute;
+                    text-align: center;
+                    top: 0;
+                    width: 20px;
+                    color: rgba(0, 0, 0, 0.26);
+                }
+               
+               .file-name, a.file-name {
+                    font-size: 12px;
+                    font-weight: 400;
+                    min-width: 200px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    width: 90%;
+                }
+               
+                a.file-name{
+                    color: rgba(0,0,0,0.87);
+                    font-weight: 500;
+                }
+               
+                & .actions{
+                    cursor: pointer;
+                    display: none;
+                    padding: 0 5px 0 10px;
+                    position: absolute;
+                    right: 0px;
+                    top: 50%;
+                    transform: translate(0px, -50%);
+                    z-index: 200;
+                }
+                
+               &:hover .actions {
+                    display: block;
+                    background: @table-bg-hover;
+                }
+            }
+            
+            
+            &.level-up {
+                background: #f4f4f4;
+                
+                & > .file > a::before{
+                    content: '\f300'; color: rgba(0,0,0,0.87); 
+                }
+            }
+            &.entity-type-folder > .file > a::before{content: '\f227'; color: #e91e63; } 
+                 &.entity-folder > .file > a::before{content: '\f227'; color: #ff9800; }
+                 &.normal-folder > .file > a::before{content: '\f228'; color: rgba(0,0,0,0.54); }
+                &.doctype-folder > .file > a::before{content: '\f227'; color: #009bd5; }
+                     &.file-type > .file > span::before{content: '\f222'; color: #4CAF50; }
+
+        }
+        .file-list-size{
+            white-space: nowrap !important;
+        }
+    }
+    &-header{
+        margin: 0;
+        padding: 0;
+        
+        .breadcrumb {
+            border-radius: 0;
+            font-size: 12px;
+            margin: 0;
+            padding: 2px 0;
+            display: inline-block;
+            white-space: nowrap;
+            width: 80%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            color: rgba(0,0,0,0.54);
+            background: rgba(0,0,0,0);
+            
+            & > li{
+                display: inline-block;
+                line-height: 18px;
+                
+                & > a{
+                    text-decoration: none;
+                    color: rgba(0,0,0,0.54);
+                    
+                    &:hover{
+                        color: #009bd5;
+                    }
+                }
+                
+                & + li::before {
+                    content: "/";
+                    padding: 0 0 0 2px;
+                }
+                
+                &:first-child > a {
+                    color: rgba(0, 0, 0, 0.87);
+                }
+            }
+            
+            & > .active {
+                color: #009bd5;
+            }
+        }
+    }
+    
+    &-header + &-content{
+        margin-top: 10px;
+    }
+    
+    table > tbody > tr > td{
+        border-right: 0 none;
+        box-shadow: none;
+    }
+}
+

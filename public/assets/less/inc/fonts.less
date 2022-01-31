@@ -1,0 +1,29 @@
+// main: ../app.less
+
+// -------------------
+// Font Face
+// -------------------
+.font-face(@family, @name, @weight: 300, @style){
+    @font-face{
+        font-family: @family;
+        src:url('../fonts/@{family}/@{name}.eot');
+        src:url('../fonts/@{family}/@{name}.eot?#iefix') format('embedded-opentype'),
+            url('../fonts/@{family}/@{name}.woff') format('woff'),
+            url('../fonts/@{family}/@{name}.ttf') format('truetype'),
+            url('../fonts/@{family}/@{name}.svg#icon') format('svg');
+        font-weight: @weight;
+        font-style: @style;
+    }
+}
+
+// Roboto Light
+.font-face(OpenSans, 'OpenSans-Light', 300, normal);
+
+// Roboto Regular
+.font-face(OpenSans, 'OpenSans-Regular', 400, normal);
+
+// Roboto Medium
+.font-face(OpenSans, 'OpenSans-Semibold', 500, normal);
+
+// Roboto Bold
+.font-face(OpenSans, 'OpenSans-Bold', 700, normal);

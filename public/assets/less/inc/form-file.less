@@ -1,0 +1,204 @@
+// main: ../app.less
+
+@file-input-bg: #FFF;
+@file-input-border: #ccc;
+@file-input-shadow: ~"0 1px 1px rgba(0,0,0,0.075) inset";
+@file-input-hover-border: #009bd5;
+@file-input-hover-shadow: ~"0 0 0 4px rgba(245, 153, 66, 0.3)";
+@file-input-btn-bg: #009bd5;
+@file-input-name-color: #555;
+@file-input-selected-name-color: #666;
+@file-input-icon-bg: #cccccc;
+@file-input-selected-icon-bg: #FEB902;
+@file-input-selected-icon-picture-bg: #BD7A9D;
+@file-input-selected-icon-film-bg: #87B87F;
+@file-input-selected-icon-music-bg: #8B7AC9;
+@file-input-selected-icon-archive-bg: #EFAD62;
+@file-remove-bg: #F5260F;
+@file-multi-remove-color: #F4C0B1;
+@file-multi-border: #AAA;
+
+
+.ace-file-input {
+	position: relative;
+	height: 38px;
+	line-height: 38px;
+	margin-bottom: 9px;
+	
+	&.input-file-xs {
+		height: 22px;
+		line-height: 22px;
+		margin-bottom: 0px;
+	}
+
+	input[type=file] {
+		cursor: pointer;
+		position: absolute;
+		width: 100%;
+		z-index: 1;
+		.opacity (0);
+	}
+
+	.file-label {
+		display: block;
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 22px;
+		margin-bottom: 0;
+		background-color: @file-input-bg;
+		border: 1px solid @file-input-border;
+		cursor: pointer;
+		.border-radius (3px);
+		.box-shadow (@file-input-shadow);
+		.transition (~"all 0.15s");
+		
+		&:before {
+			display: inline-block;
+			content: attr(data-title);
+			position: absolute;
+			right: 0;
+			top: 0;
+			bottom: 0;
+			padding: 0 8px;
+			line-height: 20px;
+			text-align: center;
+			background-color: @file-input-btn-bg;
+			color: #FFF;
+			font-size: 11px;
+			font-weight: bold;
+			.transition (~"all 0.3s");
+		}
+
+		.file-name {
+			display: inline-block;
+			height: 20px;
+			max-width: 80%;
+			white-space: nowrap;
+			overflow: hidden;
+			line-height: 20px;
+			color: @file-input-name-color;
+			font-size: 13px;
+			vertical-align: top;
+			font-weight: normal;
+			position: static;
+			padding-left: 30px;
+			&:after {
+				display: inline-block;
+				content: attr(data-title);
+			}
+		}
+
+		&.selected {
+			right: 22px;
+			.file-name {
+				color: @file-input-selected-name-color;
+			}
+		}
+
+		[class *= "icon-"] {
+			.ace-file-icon ();
+			background-color: @file-input-icon-bg;
+		}
+
+		&.selected .file-name {
+			
+			[class *= "icon-"] { background-color: @file-input-selected-icon-bg; }
+
+			.icon-picture 	{ background-color: @file-input-selected-icon-picture-bg; }
+			.icon-film 		{ background-color: @file-input-selected-icon-film-bg; }
+			.icon-music 	{ background-color: @file-input-selected-icon-music-bg; }
+			.icon-archive 	{ background-color: @file-input-selected-icon-archive-bg; }
+		}
+
+		&.hide-placeholder:before {
+			display: none;
+		}
+	}
+
+	a:hover {
+		text-decoration: none;
+	}
+
+	.remove {
+		position: absolute;
+		right: 0px;
+		top: 2px;
+		display: none;
+		width: 17px;
+		text-align: center;
+		height: 17px;
+		line-height: 15px;
+		font-size: 11px;
+		font-weight: normal;
+		background-color: @file-remove-bg;
+		.border-radius (100%);
+		color: #FFF;
+		text-decoration: none;
+		z-index: 50;
+	}
+
+	.file-label.selected + .remove {
+		display: inline-block;
+	}
+}
+
+.ace-file-icon () {
+	display: inline-block;
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	line-height: 20px;
+	width: 26px;
+	text-align: center;
+	font-family: FontAwesome;
+	font-size: 13px;
+	color: #FFF;
+	.transition (~"all 0.1s");
+}
+
+.ace-file-input input[type=file] {
+	&.disabled , &[disabled] , &[readonly] {
+		+ .file-label {
+			cursor: not-allowed;
+			background-color: #EEE;
+			&:hover {
+				.box-shadow (none);
+				border-color: #E3E3E3;
+			}
+
+			&:before {
+				border-color: #EEE;
+				background-color: #A1AAAF;
+			}
+		}
+	}
+
+	&[readonly] + .file-label {
+		cursor: default;
+	}
+}
+
+.ace-file-input input[type=file] {
+	width: ~'100% \0/';
+	height: ~'22px \0/';
+	position: ~'absolute \0/';
+	z-index: ~'1 \0/';
+	filter: alpha(opacity=0);
+	cursor: ~'pointer \0/';
+}
+
+.ace-file-input input[type=file]:hover + .file-label {
+	border-color: @file-input-border~'\0/';
+}
+
+.ace-file-multiple input[type=file] {
+	height: ~'100%\0/';
+}
+
+.ace-file-input .remove {
+	z-index: ~'2\0/';
+}
+

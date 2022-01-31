@@ -1,0 +1,180 @@
+// main: ../app.less
+
+// Tabs
+// -------------------------
+
+// Give the tabs something to sit on
+.nav-tabs {
+    border-bottom: 1px solid @nav-tabs-link-hover-border-color;
+    
+    > li {
+        float: left;
+        // Make the list-items overlay the bottom border
+        margin-bottom: -1px;
+
+        :not(.nav-justified)&:first-child{
+            margin-left: 10px;
+        }
+        // Actual tabs (as links)
+        > a {
+            margin-right: 3px;
+            line-height: @line-height-base;
+            border-radius: @border-radius-base @border-radius-base 0 0;
+            background-color: @nav-tabs-bg-color;
+            border-width: 1px;
+            border-style: solid;
+            border-color: @nav-tabs-border-color @nav-tabs-border-color @nav-tabs-link-hover-border-color;
+            color: @nav-tabs-text-color;
+            
+            &:hover {
+                border-color: @nav-tabs-link-hover-border-color;
+            }
+        }
+
+        // Active state, and its :hover to override normal :hover
+        &.active > a {
+            &,
+            &:hover,
+            &:focus {
+                color: @nav-tabs-active-link-hover-color;
+                background-color: @nav-tabs-active-link-hover-bg;
+                border: 1px solid @nav-tabs-active-link-hover-border-color;
+                cursor: default;
+            }
+        }
+        
+        // Active state, and its :hover to override normal :hover
+        &.disabled > a {
+            &,
+            &:hover,
+            &:focus {
+                color: @nav-tabs-disabled-link-hover-color;
+                background-color: @nav-tabs-disabled-link-hover-bg;
+                border: 1px solid @nav-tabs-disabled-link-hover-border-color;
+                cursor: not-allowed;
+                border-bottom: 0 transparent;
+            }
+        }        
+    }
+       
+  // pulling this in mainly for less shorthand
+    &.nav-justified {
+        .nav-justified();
+        .nav-tabs-justified();
+    }
+    
+    @media (max-width: @screen-sm-min) {
+        &:not(.nav-justified ){
+            border-bottom: 0 none;
+            width: 100%;
+            white-space: nowrap;
+            overflow-x: auto;
+
+            > li {
+                float: none;
+                margin-bottom: 0;
+                display: inline-block;
+            }
+        }
+    }
+}
+
+// Pills
+// -------------------------
+.nav-pills {
+  > li {
+    float: left;
+
+    // Links rendered as pills
+    > a {
+      border-radius: @nav-pills-border-radius;
+        color: @nav-pills-text-color;
+    }
+    + li {
+      margin-left: 2px;
+    }
+
+    // Active state
+    &.active > a {
+      &,
+      &:hover,
+      &:focus {
+        color: @nav-pills-active-link-hover-color;
+        background-color: @nav-pills-active-link-hover-bg;
+      }
+    }
+  }
+}
+
+
+// Stacked pills
+.nav-stacked {
+  > li {
+    float: none;
+    + li {
+      margin-top: 2px;
+      margin-left: 0; // no need for this gap between nav items
+    }
+  }
+}
+
+// Justified nav links
+// -------------------------
+
+.nav-justified {
+  width: 100%;
+
+  > li {
+    float: none;
+    > a {
+      text-align: center;
+      margin-bottom: 5px;
+    }
+  }
+
+  > .dropdown .dropdown-menu {
+    top: auto;
+    left: auto;
+  }
+
+  @media (min-width: @screen-sm-min) {
+    > li {
+      display: table-cell;
+      width: 1%;
+      > a {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+// Move borders to anchors instead of bottom of list
+//
+// Mixin for adding on top the shared `.nav-justified` styles for our tabs
+.nav-tabs-justified {
+  border-bottom: 0;
+
+  > li > a {
+    // Override margin from .nav-tabs
+    margin-right: 0;
+    border-radius: @border-radius-base;
+  }
+
+  > .active > a,
+  > .active > a:hover,
+  > .active > a:focus {
+    border: 1px solid @nav-tabs-justified-link-border-color;
+  }
+
+  @media (min-width: @screen-sm-min) {
+    > li > a {
+      border-bottom: 1px solid @nav-tabs-justified-active-link-border-color;
+      border-radius: @border-radius-base @border-radius-base 0 0;
+    }
+    > .active > a,
+    > .active > a:hover,
+    > .active > a:focus {
+      border-bottom-color: @nav-tabs-justified-active-link-border-color;
+    }
+  }
+}

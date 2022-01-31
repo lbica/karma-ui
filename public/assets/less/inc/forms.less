@@ -1,0 +1,193 @@
+// main: ../app.less
+//
+// Forms
+// --------------------------------------------------
+
+
+// Normalize non-controls
+//
+// Restyle and baseline non-control form elements.
+
+fieldset {
+    padding: 10px 15px 5px 15px !important;
+    margin: 0;
+    border: 1px solid #e5e5e5 !important;
+}
+
+legend {
+	display: block;
+	width: auto;
+	padding: 0 10px;
+	margin-bottom: 0;
+	font-size: @legend-font-size;
+	line-height: inherit;
+	color: @legend-color;
+	border: 0;
+	border-bottom: 1px solid @legend-border-color;
+	&.primary {
+		color: @brand-primary;
+	}
+
+	&.danger {
+		color: @brand-danger;
+	}
+
+	&.warning {
+		color: @brand-warning;
+	}
+
+	&.info {
+		color: @brand-info;
+	}
+
+	&.success {
+		color: @brand-success;
+	}
+}
+
+label {
+    display: inline-block;
+    font-weight: 400;
+    //margin-bottom: 2px;
+}
+
+textarea {
+	resize: vertical;
+}
+
+select.input-sm{
+    padding: 5px;
+}
+
+.form-control{
+    outline: none;
+    box-shadow: none;
+    font-weight: 500;
+    color: #000;
+
+    &[disabled], &[readonly], fieldset[disabled] &{
+        background: #f2f2f2;
+    }
+    &:focus{
+        box-shadow: none;
+        outline: none;
+    }
+}
+
+.form-group {
+	margin-bottom: 8px;
+    
+    .bg-info {
+        border-radius: 0;
+        color: rgba(0, 0, 0, 0.87);
+        display: block;
+        font-size: 13px;
+        font-weight: 600;
+        height: auto;
+        line-height: 22px;
+        overflow: hidden;
+        padding: 0;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    
+    > label{
+        font-size: 12px;
+    }
+    
+    /* pentru elementele de form inline, padding-right pentru primul element este 0
+       iar elementele au width: 100% */
+    .form-inline > [class*="col-"] {
+        
+        &:first-child{
+            padding-right: 0;
+        }
+        
+        .form-control{
+            width: 100%;
+        }
+    }
+    
+    .compare-operator{
+        min-width: 40px;    
+    }
+}
+// -----------------------------------------
+// Form control sizing
+// -----------------------------------------
+.input-xs {
+	.input-size (@input-height-xsmall; @padding-xsmall-vertical; @padding-xsmall-horizontal; @font-size-xsmall; @line-height-xsmall; @border-radius-small);
+}
+
+
+.asf-form-header{
+	.asf-form-title{
+		font-size: 16px;
+	    font-weight: bold;
+	    line-height: 20px;
+	    margin-bottom: 5px;
+	    margin-top: 0;
+	}
+	
+	.asf-form-text{
+	    border-bottom: 1px solid #dddddd;
+	    color: #606060;
+	    font-size: 12px;
+	    line-height: 15px;
+	    padding-bottom: 10px;
+	}
+}
+
+
+.form-horizontal {
+	.control-label {
+	    &.label-xs{
+	    	padding-top: 4px;
+	    }	    
+	    &.label-left{
+	    	text-align: left;
+	    }
+	}
+	.form-group:last-child{
+		margin-bottom: 0;
+	}
+}
+
+
+/* Pentru cand avem de pus chestii inline */
+.form-inline {
+    > [class*="col-xs-"] {
+        padding-right: 0;
+        &:last-child {
+            padding-right: 15px;
+        }
+    }
+    
+}
+
+// Colors
+// Contextual variations (linked labels get darker on :hover)
+
+.label-default {
+  .label-variant(@label-default-bg);
+}
+
+.label-primary {
+  .label-variant(@label-primary-bg);
+}
+
+.label-success {
+  .label-variant(@label-success-bg);
+}
+
+.label-info {
+  .label-variant(@label-info-bg);
+}
+
+.label-warning {
+  .label-variant(@label-warning-bg);
+}
+
+.label-danger {
+  .label-variant(@label-danger-bg);
+}

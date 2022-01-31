@@ -1,0 +1,199 @@
+// main: ../app.less
+
+#header {
+    -moz-user-select: none;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+    background: @brand-inverse;
+    left: 0;
+    min-height: 55px;
+    position: relative;
+    top: 0;
+    width: 100%;
+    z-index: 11;
+    padding: 0 11px;
+    
+    &.header-fixed{
+        position: fixed;
+        z-index: 101;
+    }
+    
+    .header-link {
+        background: @brand-primary none repeat scroll 0 0;
+        color: #ffffff;
+        cursor: pointer;
+        display: inline-block;
+        font-size: 14px;
+        margin-left: 10px;
+        padding: 18px 20px 17px;
+    }
+    
+    .logo{ 
+        
+        text-align: center;
+        width: 192px;
+        transition: all 250ms ease 0s;
+    
+        a {
+            color: #ffffff;
+            display: block;
+            text-decoration: none;
+            vertical-align: middle;
+        }
+        
+        .brand-logo{
+            display: inline-block;
+            height: 35px;
+            width: auto;
+            margin: 0;
+            padding: 0;
+            padding: 5px 0;
+        }
+        
+        .brand-text {
+            color: #ffffff;
+            display: inline-block;
+            font-family: Arial;
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 0.1em;
+            line-height: 20px;
+            padding: 8px 10px 7px;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+        
+        .brand-logo + .brand-text{
+            display: none !important;
+        }
+        
+        @media (max-width: @screen-sm-min) {
+        
+            width: 80px;
+            
+            .brand-logo{
+            
+                &.logo-xs{
+                    padding: 4px 0 6px;
+                    display: inline-block!important;
+                }
+            }
+        }
+    }
+
+}
+.header-inner {
+    list-style: outside none none;
+    margin-bottom: 0;
+    padding: 0;
+    position: relative;
+    .clearfix();
+    
+    & > li:not(.pull-right) {
+        display: inline-block;
+    }
+    
+    & > li:not(:last-child) {
+        margin-right: -2px;
+    }
+}
+
+.top-menu {
+    list-style: outside none none;
+    padding: 0;
+    display: block;
+    margin-top: 10px;
+
+    & > li {
+        display: inline-block;
+        margin: 0 1px;
+        min-width: 40px;
+        vertical-align: top;
+        position: relative;
+        
+        &::before {
+            backface-visibility: hidden;
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 2px;
+            content: "";
+            height: 100%;
+            left: 0;
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            transform: scale3d(0, 0, 0);
+            transition: all 250ms ease 0s;
+            width: 100%;
+            z-index: 0;
+        }
+        
+        &:hover::before, &.open::before {
+            opacity: 1;
+            transform: scale3d(1, 1, 1);
+        }
+        
+        .dropdown-menu-lg {
+            padding: 0;
+            
+            .lv-body {
+                height: 275px;
+                overflow-y: auto;
+            }
+        }
+        
+        & > a {
+            color: #ffffff;
+            display: block;
+            position: relative;
+            text-align: center;
+            z-index: 1;
+            padding: 5px 10px;
+            text-decoration: none;
+            
+            & > .tm-icon {
+                font-size: 24px;
+                line-height: 1;
+                
+                & ~ .caret{
+                    border-bottom-color: #ffffff;
+                    border-top-color: #ffffff;
+                    margin-top: -10px;
+                }
+            }
+            
+            & > .tmn-counts {
+                background: #f44336 none repeat scroll 0 0;
+                border-radius: 2px;
+                font-size: 10px;
+                font-style: normal;
+                line-height: 15px;
+                padding: 1px 5px;
+                position: absolute;
+                right: 0px;
+                top: 0px;
+            }
+        }
+    }
+    
+    .loged-user {
+        display: table;
+        text-align: left;
+        
+        .tm-icon {
+            display: table-cell;
+            vertical-align: middle;
+        }
+        
+        .loged-mesage {
+            display: table-cell;
+            font-weight: 500;
+            line-height: 14px;
+            padding: 0 10px;
+            transition: all 250ms ease 0s;
+            
+            > small {
+                display: block;
+                font-weight: 300;
+            }
+        }
+    }
+}

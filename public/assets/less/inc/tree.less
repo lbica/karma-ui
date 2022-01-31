@@ -1,0 +1,257 @@
+// main: ../app.less
+* { outline: none!important; }
+
+
+// ASF Tree
+//-------------------------------------
+
+// tree colors
+@tree-lines-color : #dddddd;
+
+@tree-text-color: #555555;
+@tree-text-accent-color: #202020;
+@tree-text-muted-color: rgba(0,0,0,0.15);
+
+@tree-node-color: @tree-text-accent-color;
+@tree-leaf-color: @tree-text-color;
+
+@tree-node-hover-bg: #f5f5f5; // #eef9fd
+@tree-node-selected-bg: @brand-primary;  //#d7f1fa
+@tree-node-selected-color: #fff;
+@tree-node-closed-color: @tree-text-muted-color;
+
+@tree-junction-color: #a0d4e8;
+@tree-junction-hover-color: @brand-primary;
+@tree-node-icon-color: @brand-primary;
+
+
+// tree measures
+@tree-base-line-size: 10;
+@tree-junction-icon-size: (2 * @tree-base-line-size)/14 + 0em; 
+@tree-padding: @tree-base-line-size + 0px;
+@tree-level-indentation: 2*@tree-padding;
+
+
+.k-tree {
+    padding: @tree-padding/2 @tree-padding;
+    display: block;
+
+    a { 
+        text-decoration: none; 
+        color: @tree-text-color;
+    }
+    .tree-subtree {
+        margin: 0 0 0 @tree-padding*2;
+        padding: 0;
+        position: relative;
+        
+        &::before {
+            border-left: 1px solid @tree-lines-color;
+            bottom: @tree-padding;
+            content: "";
+            left: -@tree-padding;
+            position: absolute;
+            top: 0;
+        }
+    }
+    
+   .tree-branch {
+        margin: 0;
+        padding: 0;
+        position: relative;
+       
+       > .tree-subtree::before{
+            border-bottom: 1px solid @tree-lines-color;
+            bottom: 9px;
+            content: "";
+            left: -10px;
+            position: absolute;
+            width: 10px;
+        }
+    }
+    
+    
+    
+    .tree-branch-first, .tree-branch-mid, .tree-branch-last{
+        background: none;
+    }
+    
+    
+    .tree-node {
+        color: @tree-text-color;
+        font-size: 13px;
+        
+        &::before {
+            border-top: 1px solid @tree-lines-color;
+            content: "";
+            display: block;
+            height: @tree-padding;
+            left: -@tree-padding;
+            position: absolute;
+            top: @tree-padding;
+            width: @tree-padding;
+        }
+    }
+    
+    .tree-junction, .tree-junction-collapsed, .tree-junction-expanded {
+        background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+        display: block;
+        float: left;
+        height: 2*@tree-padding;
+        margin: 0 auto;
+        position: relative;
+        text-align: center;
+        text-decoration: none;
+        width: 0px;
+        
+        &::before {
+            color: #aaaaaa;
+            content: "";
+            display: block;
+            font-family: "FontAwesome";
+            font-size: 14px;
+            height: 2*@tree-padding;
+            left: 0;
+            line-height: 1;
+            margin: 0;
+            padding: 4px 0;
+            position: absolute;
+            top: 0;
+            vertical-align: middle;
+            width: 2*@tree-padding;
+        }
+        
+        &:hover{
+            &::before {
+                color: @tree-junction-hover-color;
+            }
+        }
+    }
+    
+    .tree-junction-collapsed, .tree-junction-expanded{
+        width: 2*@tree-padding;
+        
+        & + .tree-content{
+            margin-left: 2*@tree-padding;
+        }
+    }
+
+    .tree-junction-collapsed::before{content: "\f196";}  // plus
+    .tree-junction-expanded::before{content: "\f147";}   // minus
+    
+    .tree-content {
+        display: block;
+        height: 2*@tree-padding;
+        margin: 0px;
+        padding: 0;
+        position: relative;
+        
+        &:hover{
+            .actions{
+                display: block;
+                white-space: normal;
+            }
+            
+            .tree-content-leaf, .tree-content-node{
+                &:not(.closed):not(.disabled){
+                        background-color: #f9f9f9;
+                        color: @brand-primary;
+                }
+            }
+        }
+    }
+    
+    .tree-content-leaf, .tree-content-node {
+        background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+        display: block;
+        font-weight: 400;
+        height: 2*@tree-padding;
+        padding: 0;
+        position: relative;
+        
+        i {
+            color: inherit;
+            font-size: 15px;
+            line-height: 2*@tree-padding;
+            vertical-align: top;
+            width: 1.2em;
+        }
+        
+        &.has-actions {
+            padding-right: @tree-padding*2; // 20px
+        }
+    }
+    
+    .tree-label {
+        color: inherit;
+        display: inline-block;
+        font-size: inherit;
+        font-weight: 400;
+        line-height: 2*@tree-padding;
+        margin: 0;
+        overflow: hidden;
+        padding: 0;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 100%;
+    }
+
+    .tree-content-node .tree-label{
+        font-weight: 500;
+    }
+    
+    .tree-root > .tree-branch > .tree-node::before {
+        border: 0 none;
+    }
+    // Set status to a node as SELECTED
+    .selected {
+        padding: 0 5px;
+
+        &, &:hover, &:focus, &:active{
+            background-color: @brand-primary!important;
+            color: #ffffff!important;
+        }
+    }
+    // Set status to a node as CLOSED or DISABLED
+    .closed, .disabled {
+        opacity: 0.3;
+        
+        a{ 
+            cursor: not-allowed; 
+            
+            &:hover, &:focus, &:active{
+                background-color: none!important;
+                color: #555!important;
+                
+                &::before{
+                    color: #aaa;
+                }
+            }
+        }
+        .tree-junction:hover::before { color: #555; }
+    }
+    
+    // Add actions to a node
+    .actions{
+        position: absolute;
+        right: 0;
+        top: 1px;
+        display: none;
+        
+        .dropdown-menu{
+            margin: 0;
+            
+            // in case we limit the width of the dropdown
+            > li > a{
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+    }
+}
+
+.asf-tree{    
+    .modal-body:not(.no-padding) > &{ margin: -10px -20px; }
+    .panel-body:not(.no-padding) > &{ margin: -15px; }
+    .panel-content:not(.no-padding) > &{ margin: -10px -15px; }
+}

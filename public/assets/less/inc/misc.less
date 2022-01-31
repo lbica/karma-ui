@@ -1,0 +1,138 @@
+// main: ../app.less
+
+// ------------------------------
+// Header Actions
+// ------------------------------
+.actions {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    
+    & > li {
+        display: inline-block;
+        vertical-align: baseline;
+        margin: 0 -1px;
+        
+        .btn{
+            margin-top: -2px;
+        }
+    }
+    
+    & > li > a:not(.btn),
+    & > a:not(.btn) {
+        width: 18px;
+        height: 18px;
+        line-height: 18px;
+        display: inline-block; 
+        text-align: center;
+
+        & > i {
+            .transition(color);
+            .transition-duration(1300ms);
+            color: rgba(0,0,0,0.26);
+            font-size: 14px;
+            line-height: 1;
+            padding-top: 2px;
+        }
+        
+        &:hover {
+            & > i {
+                color: rgba(0,0,0,0.87);
+            }
+        }
+
+        .hover-pop(rgba(0,0,0,0.1), 50%, 250ms, 0);
+    }
+    
+    & > li.open, 
+    &.open {
+        & > a:not(.btn) {
+            & > i {
+                color: rgba(0,0,0,0.87);
+            }
+            
+            &:before {
+                .scale(1);
+                .opacity(1);
+            }
+        }
+    }
+    
+    &.actions-alt {
+        & > li {
+            & > a > i {
+                color: #fff;
+                
+                &:hover {
+                    color: #fff;
+                }
+            }
+            
+            &.open {
+                & > a:not(.btn) {
+                    & > i {
+                        color: #fff;
+                    }
+                }
+            }
+        }
+    }
+    
+    &.open {
+        z-index: 3;
+    }
+}
+
+/*
+ * Block Header
+ * Used for Heading outside the Cards, Panels.
+ */
+.block-header {
+    @media screen and (min-width: @screen-sm-min) {
+        padding: 0 5px;
+    }
+    
+    @media screen and (max-width: @screen-sm-max) {
+        padding: 0 10px;
+    }
+    
+    margin-bottom: 20px;
+    position: relative;
+    
+    & > h2 {
+        font-size: 15px;
+        margin: 0;
+        font-weight: 500;
+        text-transform: uppercase;
+        
+        & > small {
+            display: block;
+            text-transform: none;
+            margin-top: 8px;
+            margin-bottom: 20px;
+            color: rgba(0,0,0,0.54);
+            line-height: 140%;
+            font-size: 12px;
+        }
+    }
+    
+    .actions {
+        position: absolute; 
+        right: 0px;
+        top: -5px;
+        
+        & > li > a, & > a {
+            display: inline-block;
+            height: 30px;
+            line-height: 1;
+            position: relative;
+            text-align: center;
+            width: 30px;
+            
+            & > i {
+                font-size: 20px;
+                padding-top: 5px;
+            }
+        }
+    }
+}

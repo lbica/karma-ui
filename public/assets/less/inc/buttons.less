@@ -1,0 +1,169 @@
+// main: ../app.less
+
+// Base styles
+// --------------------------------------------------
+
+.btn {
+    display: inline-block;
+    margin-bottom: 0; // For input.btn
+    font-weight: @btn-font-weight;
+    text-align: center;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
+    border: 1px solid transparent;
+    white-space: nowrap;
+    .button-size(@padding-base-vertical; @padding-base-horizontal; @font-size-base; @line-height-base; @btn-border-radius-base);
+    .user-select(none);
+
+    &,
+    &:active,
+    &.active {
+        &:focus,
+        &.focus {
+          .tab-focus();
+        }
+    }
+
+    &:hover,
+    &:focus,
+    &.focus {
+        color: @btn-default-color;
+        text-decoration: none;
+    }
+
+    &:active,
+    &.active {
+        outline: 0;
+        background-image: none;
+        .box-shadow(none);
+    }
+
+    &.disabled,
+    &[disabled],
+    fieldset[disabled] & {
+        cursor: @cursor-disabled;
+        .opacity(.65);
+        .box-shadow(none);
+    }
+
+    a& {
+        &.disabled,
+        fieldset[disabled] & {
+            pointer-events: none; // Future-proof disabling of clicks on `<a>` elements
+        }
+    }
+}
+
+.button-variant(@color; @background; @border) {
+    color: @color;
+    background-color: @background;
+    border-color: @border;
+
+    &:focus,
+    &.focus {
+        color: @color;
+        background-color: shade(@background, 10%);
+        border-color: shade(@border, 12%);
+    }
+    &:hover {
+        color: @color;
+        background-color: shade(@background, 10%);
+        border-color: shade(@border, 12%);
+    }
+    &:active,
+    &.active,
+    .open > .dropdown-toggle& {
+        color: @color;
+        background-color: shade(@background, 10%);
+        border-color: shade(@border, 12%);
+
+        &:hover,
+        &:focus,
+        &.focus {
+          color: @color;
+          background-color: shade(@background, 17%);
+              border-color: shade(@border, 12%);
+        }
+    }
+    
+    &:active,
+    &.active,
+    .open > .dropdown-toggle& {
+        background-image: none;
+    }
+    
+    &.disabled,
+    &[disabled],
+    fieldset[disabled] & {
+        &:hover,
+        &:focus,
+        &.focus {
+              background-color: @background;
+              border-color: @border;
+        }
+    }
+
+    .badge {
+    color: @background;
+    background-color: @color;
+    }
+}
+// Alternate buttons
+// --------------------------------------------------
+
+.btn-default { .button-variant(@btn-default-color; @btn-default-bg; @btn-default-border); }
+.btn-primary { .button-variant(@btn-primary-color; @btn-primary-bg; @btn-primary-border); }
+.btn-warning { .button-variant(@btn-warning-color; @btn-warning-bg; @btn-warning-border); }
+ .btn-danger { .button-variant(@btn-danger-color; @btn-danger-bg; @btn-danger-border); }
+.btn-success { .button-variant(@btn-success-color; @btn-success-bg; @btn-success-border); }
+   .btn-info { .button-variant(@btn-info-color; @btn-info-bg; @btn-info-border); }
+
+// Button Sizes
+// --------------------------------------------------
+
+.btn-lg { .button-size(@padding-large-vertical; @padding-large-horizontal; @font-size-large; @line-height-large; @btn-border-radius-large); }
+.btn-sm { .button-size(@padding-small-vertical; @padding-small-horizontal; @font-size-small; @line-height-small; @btn-border-radius-small); }
+.btn-xs { .button-size(@padding-xsmall-vertical; @padding-xsmall-horizontal; @font-size-xsmall; @line-height-xsmall; @border-radius-small); }
+
+// Alternate backgrounds for buttons
+// --------------------------------------------------
+@btnarray: m-black, m-blue, m-red, m-purple, m-deeppurple, m-lightblue, m-cyan, m-teal, m-green, m-lightgreen, m-lime,m-yellow,  m-amber, m-orange, m-deeporange, m-gray, m-bluegray, m-indigo, m-pink, m-brown;
+
+.button-color (@index) when (@index > 0) {
+    @color: extract(@btnarray, @index);
+    @name: replace(@color,'m-','');
+    .btn-@{name}{ 
+      .button-variant(#fff, @@color, darken(@@color,5%));
+    }
+    .button-color (@index - 1);
+}
+// Generate btn with alternate backgrounds
+.button-color(length(@btnarray));
+
+
+// Buttons with icon and/or text
+.btn-icon {
+    border-radius: 50%;
+    height: 36px;
+    line-height: 1;
+    padding: 0;
+    width: 36px;
+    
+    i {
+        font-size: 36px/2!important;
+        line-height: 36px;
+    }
+}
+
+.btn-icon-text {
+    i {
+        display: inline-block;
+        font-size: 15px!important;
+        line-height: 100%;
+        margin-right: 3px;
+        margin-top: 3px;
+        vertical-align: top;
+    }
+}

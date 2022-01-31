@@ -1,0 +1,228 @@
+// main: ../app.less
+
+// main: ../app.less
+
+
+// Custom border colors
+//
+// Extra classes for showing a specific status for a `.list-group-item`s.
+
+@mdarray: m-black, m-blue, m-red, m-purple, m-deeppurple, m-lightblue, m-cyan, m-teal, m-green, m-lightgreen, m-lime,m-yellow,  m-amber, m-orange, m-deeporange, m-gray, m-bluegray, m-indigo, m-pink, m-brown;
+
+.status-color (@index) when (@index > 0) {
+
+    @color: extract(@mdarray, @index);
+    @name: replace(@color,'m-','');
+
+    &.status-@{name}{ border-left-color: @@color; }    
+    
+    .status-color (@index - 1);
+}
+
+//
+// List groups
+// --------------------------------------------------
+
+// clear paddings and borders
+.clear-list {
+    .list-group-item {
+        border-top: 1px solid #f3f3f3;
+        border-bottom: 0;
+        border-right: 0;
+        border-left: 0;
+        padding: 5px 10px;
+        font-size: 13px;
+        
+        a{
+            color: rgba(0,0,0,0.54);
+            display: block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            
+            &:hover, &:focus{
+                color: @brand-primary;
+            }
+        }
+    }
+}
+
+// add a colored border on the left
+.custom-status{
+    .list-group-item {
+        border-left-color: @list-group-border;
+        border-left-width: 5px;
+        border-left-style: solid;
+        .status-color(length(@mdarray));
+    }
+}
+
+.first-item {
+  border-top: none !important;
+}
+
+
+.list-group-item .label {
+  margin-right: 10px;
+}
+
+// clear paddings and borders
+.nav-list {
+    .list-group-item {
+        border-top: 1px solid #f4f4f4;
+        border-bottom: 0;
+        border-right: 0;
+        border-left: 0;
+        border-radius: 0;
+        
+        & > i{
+            color: @brand-primary;
+        }
+        
+        &:hover, &:focus{
+            background: tint(@brand-primary,95%);
+            color: inherit;
+            box-shadow: 5px 0 0 @brand-primary inset;
+        }
+        
+        &.active{
+            background: tint(@brand-primary,90%);
+            box-shadow: 5px 0 0 @brand-primary inset;
+            color: inherit;
+            z-index: -1;
+            
+            &:hover, &:focus{
+                border-color: #f4f4f4;
+                z-index: -1;
+            }
+        }
+    }
+    
+    .nav-list-header{
+        padding: 20px 15px;
+        background: #f4f4f4;
+        color: #000;
+        font-weight: 600;
+        font-size: 15px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        line-height: 18px;
+    }
+    margin-bottom: 0;
+}
+
+// Custom content options
+//
+// Extra classes for creating well-formatted content within `.list-group-item`s.
+
+.custom-layout{
+
+    .list-group-item {
+
+        .custom-item-left, 
+        .custom-item-body, 
+        .custom-item-right,
+        .actions {
+            display: table-cell;
+        }
+        
+        .custom-item-body{
+            width: 90%;
+        }
+        
+        .custom-item-left, 
+        .custom-item-right{
+            min-width: 5%;
+        }
+
+        .custom-item-left, 
+        .custom-item-body, 
+        .custom-item-right{
+            padding-right: 10px;
+
+            &, .checkbox-inline, .radio-inline{
+                vertical-align: top;
+            }
+        }
+        
+        .custom-item-right{
+            &:first-child, &:last-child{
+                padding-right: 0;
+            }
+            
+            white-space: nowrap;
+        }
+
+        &-heading {
+            margin-top: 0;
+            margin-bottom: 5px;
+            font-weight: 500;
+            line-height: 1.1;
+
+        }
+        &-text {
+            margin-bottom: 0;
+            line-height: 1.3;
+            font-size: 12px;
+        }
+
+        // Disabled state
+        &.disabled,
+        &.disabled:hover,
+        &.disabled:focus {
+            background-color: @list-group-disabled-bg;
+            color: @list-group-disabled-color;
+            cursor: @cursor-disabled;
+
+            // Force color to inherit for custom content
+            .list-group-item-heading {
+              color: inherit;
+            }
+            .list-group-item-text {
+              color: @list-group-disabled-text-color;
+            }
+        }  
+
+        // Active class on item itself, not parent
+        &.active,
+        &.active:hover,
+        &.active:focus {
+            z-index: auto; // Place active items above their siblings for proper border styling
+            color: @list-group-active-color;
+            background-color: @list-group-active-bg;
+            border-color: @list-group-active-border;
+
+            // Force color to inherit for custom content
+            .list-group-item-heading,
+            .list-group-item-heading > small,
+            .list-group-item-heading > .small {
+              color: inherit;
+            }
+            .list-group-item-text {
+              color: @list-group-active-text-color;
+            }
+
+            .actions > a:not(.btn) > i, .actions > li > a:not(.btn) > i{
+                color: #fff;
+            }
+        }     
+
+        // Active class on item itself, not parent
+        &.selected,
+        &.selected:hover,
+        &.selected:focus {
+            z-index: auto; // Place active items above their siblings for proper border styling
+            background-color: shade(@brand-primary, 90%);
+
+            // Force color to inherit for custom content
+            .list-group-item-heading,
+            .list-group-item-heading > small,
+            .list-group-item-heading > .small {
+              color: inherit;
+            }
+            .list-group-item-text {
+              color: inherit;
+            }
+        }        
+    }
+}

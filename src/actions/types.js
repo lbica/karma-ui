@@ -1,0 +1,3 @@
+
+export const GET_ENVIRONMENTITEMS = "GET_ENVIRONMENTITEMS";
+export const GET_ZONE = "GET_ZONE";
